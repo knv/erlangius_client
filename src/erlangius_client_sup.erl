@@ -17,6 +17,10 @@
 %% ===================================================================
 
 start_link() ->
+    %% GET SHAREDKEY:HOST ARRAY FROM CONFIG
+    {ok, Socket} = gen_udp:open(?PORT),
+    Hosts = [],
+    erlangius_client:start_link({Socket, Hosts, []}),
     supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 %% ===================================================================
